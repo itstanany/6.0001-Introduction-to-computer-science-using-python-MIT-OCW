@@ -19,3 +19,21 @@ if x%2 != 0 and y%2 != 0 and z%2 != 0:
         print("The Largest Odd Number is X =", x)
     elif z < y:
         print("The Largest Odd Number is Y =", y)
+        
+# if two numbers only are odd.
+elif x%2 != 0 and y%2 != 0:
+    if x < y:
+        print("The Largest Odd Number is Y =", y)
+    else:
+        print("The Largest Odd Number is X =", x)
+elif x%2 != 0 and z%2 != 0:
+    if z > x:
+        print("The Largest Odd Number is Z =", z)
+    else:
+        print("The Largest Odd Number is X =", x)
+        
+elif y%2 != 0 and z%2 != 0:
+    if z > y:
+        print("The Largest Odd Number is Z =", z)
+    else:
+        print("The Largest Odd Number is Y =", y)
