@@ -15,5 +15,11 @@ print(toPrint)
 *******
 """
 
-
+numXs = int(input('How many times should I print the letter X? '))
+toPrint = ''
+i = 1
+while(i <= numXs):
+    toPrint += 'X'
+    i += 1
+print(toPrint)
 
