@@ -37,3 +37,11 @@ elif y%2 != 0 and z%2 != 0:
         print("The Largest Odd Number is Z =", z)
     else:
         print("The Largest Odd Number is Y =", y)
+
+# only one user input is odd
+elif x%2 != 0:
+    print("The Only and Largest Odd Number is X =", x)
+elif y%2 != 0:
+    print("The Only and Largest Odd Number is Y =", y)
+elif z%2 != 0:
+    print("The Only and Largest Odd Number is Z =", z)
