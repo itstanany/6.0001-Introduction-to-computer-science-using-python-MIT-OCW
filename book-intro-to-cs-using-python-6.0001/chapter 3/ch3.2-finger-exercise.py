@@ -13,3 +13,14 @@ sum of the numbers in s.
 *******
 """
 
+s = '1.23,2.4,3.123'
+list1 = s.split(',')
+list2 = []
+for i in list1:
+    list2.append(float(i))
+total2 = 0
+for a in list2:
+    total2 = total2+ a
+    
+print(total2)
+
