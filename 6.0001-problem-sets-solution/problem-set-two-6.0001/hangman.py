@@ -115,7 +115,17 @@ def get_available_letters(letters_guessed):
       yet been guessed.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    all_english_lowercase = string.ascii_lowercase
+    length_lowercase = len(all_english_lowercase)
+    lower_letters_guessed = list_to_lowercase(letters_guessed)
+    available_letters = ''
+    # loop through all english alphabet, only that haven't been guessed yet is added to available letters
+    for c in range(0, length_lowercase) :
+        if all_english_lowercase[c] in lower_letters_guessed:
+            available_letters = available_letters
+        else:
+            available_letters = available_letters + all_english_lowercase[c]
+    return available_letters
     
     
 
