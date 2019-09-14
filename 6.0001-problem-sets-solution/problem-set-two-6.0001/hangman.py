@@ -155,7 +155,91 @@ def hangman(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    print('Welcome to the game Hangman!')
+    print('I am thinking of a word that is', len(secret_word), 'letters long.')
+    # Available number of guesses as stated in the game requirements
+    num_guess_left = 6
+    # Available number of warnings as stated in the game requirements
+    num_warning_left = 3
+    # vowels charchters in English
+    vowels = 'aeoui'
+    # list contains all letters the user input
+    guessed_letters_from_user = []
+    # loop that establishes the the interactive agme between the computer and the user
+    # it loops as far as the there are availables guess trails and the word isn't compeletely guessed yet.
+    while num_guess_left > 0 and not is_word_guessed(secret_word, guessed_letters_from_user):
+        # print dashes at every time to separate different sessions
+        print('--------------')
+        # informing the user with remainig available warning left
+        print('You have',num_warning_left  ,' warning/s left.')
+        # informing the user with remainig available guesses/trails left
+        print('You have',num_guess_left  ,' guess/es left.')
+        # Showing the valid user input only
+        print('ALPHABET Letters are the only valid Input')
+        # Showing the user the available letters that haven't been gueesed so for and he/she can choose from
+        print('Available Letters are:', get_available_letters(guessed_letters_from_user))
+        # asking the user to enter an engkish letter then casting it into lowercase
+        user_guess = input('Please guess a letter: ').lower()
+        # building the part of secret word that has been guessed so far and representing it as guessed letters and dashes
+        guessed_word = get_guessed_word(secret_word, guessed_letters_from_user + list(user_guess))
+        # checking the user input if it's valid and meets the game requirements, printing the user statement of achievement
+        if str.isalpha(user_guess) and len(user_guess) == 1 and user_guess not in guessed_letters_from_user and user_guess in secret_word:
+            print('Good guess: ', guessed_word)
+        # if the user input isn't valid, the user should lose warnings first then guess trails according to the gane requirements
+        else:
+            if num_warning_left <= 0:
+                    # according to the game requirements, user should lose 2 guesses or warnings if the invalid input is vowel, othersie the lose is only one either guess or warning
+                    if user_guess in vowels:
+                        num_guess_left = num_guess_left - 2
+                        if user_guess in guessed_letters_from_user:
+                            print("Oops! You've already guessed that letter. You have", num_guess_left, "guess/es left: ", guessed_word)
+                        else: 
+                            print("Oops! That is not a valid letter. You have", num_guess_left, "guess/es left: ", guessed_word)
+                    else:
+                        num_guess_left = num_guess_left - 1
+                        if user_guess in guessed_letters_from_user:
+                            print("Oops! You've already guessed that letter. You have", num_guess_left, "guess/es left: ", guessed_word)
+                        else: 
+                            print("Oops! That is not a valid letter. You have", num_guess_left, "guess/es left: ", guessed_word)
+                # if the user still has warnings availble, he should lose warnings first
+            else:
+                    # according to the game requirements, user should lose 2 guesses or warnings if the invalid input is vowel, othersie the lose is only one either guess or warning
+                    if user_guess in vowels:
+                        # if ther eis only one warning left, the user lose the remaining one warning and one guess trail
+                        if num_warning_left == 1:
+                            num_warning_left = num_warning_left - 1
+                            num_guess_left = num_guess_left - 1
+                            if user_guess in guessed_letters_from_user:
+                                print("Oops! You've already guessed that letter. You have", num_guess_left, "guess/es left: ", guessed_word)
+                            else: 
+                                print("Oops! That is not a valid letter. You have", num_warning_left, "warning/s left: ", guessed_word)
+                            # if ther is more than one warning, the user hsould lose two warnings for invalid vowel
+                        else:
+                            num_warning_left = num_warning_left - 2
+                            if user_guess in guessed_letters_from_user:
+                                print("Oops! You've already guessed that letter. You have", num_warning_left, "warning/s left: ", guessed_word)
+                            else: 
+                                print("Oops! That is not a valid letter. You have", num_warning_left, "warning/s left: ", guessed_word)
+                            # if the invalid input is consonant, the user should lose only one either warning or guess trail.
+                    else:
+                        num_warning_left = num_warning_left -1
+                        if user_guess in guessed_letters_from_user:
+                            print("Oops! You've already guessed that letter. You have", num_warning_left, "warnings left: ", guessed_word)
+                        else: 
+                            print("Oops! That is not a valid letter. You have", num_warning_left, "warning/s left: ", guessed_word)
+        # saving all user input either valid or not to use it in the fnction "get_gueesed_word" and "is_word_guessed"
+        guessed_letters_from_user.append(user_guess)
+    
+    if is_word_guessed(secret_word, guessed_letters_from_user):
+        unique_letters_of_secret_word = []
+        for h in secret_word:
+            if h not in unique_letters_of_secret_word:
+                unique_letters_of_secret_word.append(h)
+        total_score = num_guess_left * len(unique_letters_of_secret_word)
+        print('Congratulations, you won!')
+        print('Your total score for this game is:', total_score)
+    else:
+        print('Sorry, you ran out of guesses. The word was', secret_word)
 
 
 
