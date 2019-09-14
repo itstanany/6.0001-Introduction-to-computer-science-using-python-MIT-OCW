@@ -14,6 +14,17 @@ import string
 
 WORDLIST_FILENAME = "words.txt"
 
+def list_to_lowercase(list_parameter):
+    '''
+    list_parameter: list contains english charchters -uppercase and lowercase-
+    it reurns a list that all its elements are lowercase strings
+    '''
+    lower_letters_guessed = []
+    for a in list_parameter:
+        a = str(a).lower()
+        lower_letters_guessed.append(a)
+    return lower_letters_guessed
+
 
 def load_words():
     """
@@ -61,7 +72,17 @@ def is_word_guessed(secret_word, letters_guessed):
       False otherwise
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    secret_word = str(secret_word).lower()
+    lower_letters_guessed = list_to_lowercase(letters_guessed)
+    # it will contain True if the charchter of secret_word is present in the letters_gueesed list
+    # it will contains false if the charchter in secret_word isn't guessed
+    trues_falses = []
+    # for each charchter in secret_word,, append false if the charchter isn't in list and true otherwise
+    for c in secret_word:
+        trues_falses.append(c in lower_letters_guessed)
+    # return true if all charchters of the secret word are present in list of charchters guessed
+    # this code returns true if "False" isn't present in the list or trues_falses, that means that 
+    return (False not in trues_falses)
 
 
 
