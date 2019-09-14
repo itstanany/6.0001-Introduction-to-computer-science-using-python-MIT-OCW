@@ -263,7 +263,40 @@ def match_with_gaps(my_word, other_word):
         False otherwise: 
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    # casting my_word to string, then removing all whitespaces, then casting it to lowercase
+    my_word = str(my_word).replace(" ", "").lower()
+    # casting my_word to string, then removing all whitespaces, then casting it to lowercase
+    other_word = str(other_word).replace(" ", "").lower()
+    # for efficiency, make sure that the two words have the same length, if so check the equality and other ckecks, otherwise, return false
+    if (len(my_word) == len(other_word)):
+        # saving the result of the tests of the equality between each lettters in my_wor and other_word
+        trs_fls = []
+        # loop through each word in 'my_word'
+        for e in range(0, len(other_word)):
+            # at th bgging, return true if the two chachters with the same index are the same
+            if my_word[e] == other_word[e]:
+                trs_fls.append(True)
+            # else if, uf the chachter in my_word is spechial symol "_" return true after....
+            # we check if the the chachter with the same index in "other_word" has no occurences at all in "my_word"
+            # because the game requirement stated if an chachter isn't guessed once, it is revealed in all its occurences
+                '''
+                This is the game requirement
+                Remember that when a letter is guessed, your code reveals all the positions at which
+                that letter occurs in the secret word. Therefore, the hidden letter (_ ) ​cannot be ​one
+                of the letters in the word that has already been revealed.
+                '''
+            elif my_word[e] == '_' and not (other_word[e] in my_word):
+                trs_fls.append(True)
+            # otherwise, return false
+            else:
+                trs_fls.append(False)
+        '''
+        if there is no "False" occurence at all in "trs_fls" list, this means that: the same indices in two words "my_word and other_word" have the same letter or it is "_"
+        '''
+        return (not (False in trs_fls))
+    # return falsse if the length of "my_word" and "other_word" is different
+    else:
+        return False
 
 
 
