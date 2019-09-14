@@ -311,7 +311,13 @@ def show_possible_matches(my_word):
 
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    possible_matches = ""
+    for s in range(0, len(wordlist)):
+        current_word = wordlist[s]
+        if(match_with_gaps(my_word, current_word)):
+            possible_matches = possible_matches + " " + current_word
+    return print("Possible word matches are:\n", possible_matches)
+
 
 
 
