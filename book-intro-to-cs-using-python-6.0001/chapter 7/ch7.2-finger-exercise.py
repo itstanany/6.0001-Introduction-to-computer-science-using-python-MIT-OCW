@@ -22,4 +22,15 @@ Raises ValueError if L does not contain an even number"""
 
 *******
 '''
+def findAnEven(L):
+    """Assumes L is a list of integers
+    Returns the first even number in L
+    Raises ValueError if L does not contain an even number"""
+    for e in L:
+        if e%2 == 0:
+            return e
+        else:
+            e = e
+    raise ValueError('The provided list does not contain an even number')
+    return None
 
