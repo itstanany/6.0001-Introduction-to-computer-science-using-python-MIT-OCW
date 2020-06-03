@@ -186,7 +186,27 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
 
-    pass  # TO DO... Remove this line when you implement this function
+     #asserting the word is in lowercase
+    word = word.lower()
+    #make a copy of hand that's totlly new and any change in it doesn't affect the original dictionary
+    copy_hand = copy.deepcopy(hand)
+    #eliminate letters of the word form the hand, and if not present make its value negative
+    for a in word:
+        # eliminate each letter of word that's present in hand, otherwise, ignore it
+        if a in copy_hand:
+            #reduces its value by 1, even if it's zero, make its value negative
+            copy_hand[a] = copy_hand.get(a, 0) - 1
+            
+    #new updated hand that will be the return value of the function.It contains left letters that are in hand but not used in word
+    new_updated_hand = {}
+    #add unused letters to the new upadted hand
+    for k in copy_hand:
+        #if value of the letter is positive, this implies it's unused letter
+        if copy_hand[k] > 0:
+            #add unused letters a keys and their value is their number left in hand
+            new_updated_hand[k] = copy_hand[k]
+    #return dictionary that contains string keys which are unused latters, and integer values that indicate their frequencies
+    return new_updated_hand
 
 #
 # Problem #3: Test word validity
