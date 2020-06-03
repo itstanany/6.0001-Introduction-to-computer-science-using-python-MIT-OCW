@@ -3,7 +3,7 @@
 # The 6.0001 Word Game
 # Created by: Kevin Luu <luuk> and Jenna Wiens <jwiens>
 #
-# Name          : <your name>
+# Name          : <Ahmed Ali Mohamed>
 # Collaborators : <your collaborators>
 # Time spent    : <total time>
 
@@ -92,7 +92,25 @@ def get_word_score(word, n):
     returns: int >= 0
     """
     
-    pass  # TO DO... Remove this line when you implement this function
+     # computing the first component score
+    # converitng string to lower case
+    word = word.lower()
+    #initializing score variable to track the score value
+    word_score = 0
+    #if the word string is non-empy string, compute the two component scores
+    if len(word) > 0:
+        #first-compoenent score
+        for x in word:
+            word_score = word_score + SCRABBLE_LETTER_VALUES[x]
+        # calculauting the second possibility for the second component score to get the bigger
+        one_possible_comp_two = (7 * len(word)) - (3 * (n- len(word)))
+        #test for the bigger second compoenent value, then calculate the final word score
+        if one_possible_comp_two > 1:
+            word_score = word_score * one_possible_comp_two
+        else:
+            word_score = word_score * 1
+    #return an integer that represnts score of the word
+    return word_score
 
 #
 # Make sure you understand how this function works and what it does!
