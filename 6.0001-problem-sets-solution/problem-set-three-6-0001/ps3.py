@@ -277,7 +277,15 @@ def calculate_handlen(hand):
     returns: integer
     """
     
-    pass  # TO DO... Remove this line when you implement this function
+    #initialize sum variable
+    sum = 0
+    #loop through each key of hand,
+    # if there is no keys in the dictionary, the loop isn't entered
+    for k in hand:
+        #extract its value and add it to the sum using incremental method
+        sum = sum + hand.get(k, 0)
+    #return sum variable
+    return sum
 
 def play_hand(hand, word_list):
 
