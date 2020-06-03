@@ -187,7 +187,7 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
 
-     #asserting the word is in lowercase
+    #asserting the word is in lowercase
     word = word.lower()
     #make a copy of hand that's totlly new and any change in it doesn't affect the original dictionary
     copy_hand = copy.deepcopy(hand)
@@ -456,8 +456,85 @@ def play_game(word_list):
 
     word_list: list of lowercase strings
     """
-    
-    print("play_game not implemented.") # TO DO... Remove this line when you implement this function
+   
+    #ask the user to input a total number of hands
+    total_hands = int(input("Enter total number of hands: "))
+    #INItoalize variable for recording total scores of all hands
+    score_total_hands = 0
+     #initalize variable to record the substitution option validity, this is can be done once during the game, so they are written outslide number of hands loop
+    sub_valid = True
+     #initalize varibale for recording replaying preference, this is can be done once during the game, so they are written outslide number of hands loop
+    replay_validity = True
+    #playing n hands according to user choice
+    for i in range(0, total_hands):
+        #for each hand:       
+        #get the hand
+        current_hand = deal_hand(HAND_SIZE)
+        #list the two possible scores of a hand
+        current_hand_scores = [0, 0]
+        #initialize variable for recording the tries of playing the same hand
+        current_hand_try = 0
+        #initalize variable for recording user prefernece for replying the current hand
+        current_replay_pref = True
+        #test for replaying preference and number of tries is less that two, as replaying can be done only once
+        while (current_replay_pref and (current_hand_try < 2)):
+            #if replaying is valid, play again
+            print("Current hand:", end = '')
+            display_hand(current_hand)
+            # if there are two conditions and one is after the other, then make nested loop, with outer loop is the first condition and inner loop the second consequent condition
+            #test for substitution validity and user prefernce for sub
+            if sub_valid:
+                #ask for user if s/he wants to substitute a letter
+                us_sub_pref = input("Would you like to substitute a letter? ").lower()
+                if (us_sub_pref == "yes"):
+                    #ask which letter and do the substituion, 
+                    user_sub_letter = input("Which letter would you like to replace: ")
+                    current_hand = substitute_hand(current_hand, user_sub_letter)
+                    sub_valid = False
+                else:
+                    pass
+            else:
+                pass
+            #let the user play the game with hand
+#Note of fails:
+# here, if you want to do the function and use its return function later, you should store its return value in a varibale, because if you call it again in position where you want to use its return value, it will excute again and have return value other than one upo had from the past call
+            score_current_try = play_hand(current_hand, word_list)
+            #store the score of the play trial at ithe list of possible scores variable using the number tries variable as the index number
+            current_hand_scores[current_hand_try] = score_current_try
+            #tell user score of this hand try
+            print("Total score for this hand try:", current_hand_scores[(current_hand_try)])
+# if there are two conditions and one is after the other, then make nested loop, with outer loop is the first condition and inner loop the second consequent condition
+            if replay_validity:
+                #test for replaying preference,
+                print("-------------------------------------------------------------")
+                us_replaying_pref = input("Would you like to replay the hand? ").lower()
+                 #if so ask the user if they would like to replay the hand. and increase number of rails by 1
+                if (us_replaying_pref == "yes"):
+                    current_hand_try += 1
+                    # tuen replaying option false as replaying can be done only ONCE DURING THE GAME
+                    replay_validity = False
+                else:
+                    current_replay_pref = False
+            #otherwise, turn replaying preference of the current hand to false
+            else:
+                current_replay_pref = False
+            
+        #add the hisghest score of two tries to the total score
+        if current_hand_scores[0] > current_hand_scores[1]:
+            #tell user the highest score for this hand that will be added to the final score
+            print("Hand score that will be added to overall score is:", current_hand_scores[0])
+            score_total_hands += current_hand_scores[0]
+        else:
+            #tell user the highest score for this hand that will be added to the final score
+            print("Hand score that will be added to overall score is:", current_hand_scores[1])
+            score_total_hands += current_hand_scores[1]
+        #play the next hand
+        print("End of Hand number:", (i+1), "------------------------------------------------------------")
+    # return the total score for all hand series
+    print("Total score over all hands:", score_total_hands)
+    print("End of the Game. Hope you enjoyed it. :)")
+        
+    return score_total_hands
     
 
 
