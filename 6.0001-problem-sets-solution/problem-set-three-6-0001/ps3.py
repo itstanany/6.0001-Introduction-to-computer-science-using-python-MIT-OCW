@@ -223,7 +223,47 @@ def is_valid_word(word, hand, word_list):
     returns: boolean
     """
 
-    pass  # TO DO... Remove this line when you implement this function
+    #asserting "word" is in lowercase
+    word = word.lower()
+    #list of all possible words
+    possible_words_list = []
+    #test whether the word contains asterisk letter or not
+    asterisk_index = word.find("*")
+    #return false if the word doesn't contains asterisk and doesn't present in word list
+    if asterisk_index != -1 or word in word_list:
+        #get all possible word if the word contains asterisk
+        if asterisk_index != -1:
+            for a in VOWELS:
+                possible_word = word[0:asterisk_index] + a + word[asterisk_index + 1:len(word)]
+                possible_words_list.append(possible_word)
+        else:
+            # if the word doesn't contains asterisk, list it as the single possible word
+            possible_words_list.append(word)
+        # loop through each word of possible word and test its valisity
+        for i in range(len(possible_words_list)):
+            # if the word is presnt in word_list then go forward and test whether it's formed entirely of letters that are present in hand dictionary
+            if possible_words_list[i] in word_list:
+                #make dictionary contains letters of the word as keys and their number as key value
+                word_letters_frequencies = get_frequency_dict(possible_words_list[i])
+                #record the boolean results of testing whether all letters of the word are in the hand dictionary or not
+                # to end the function once the word passes the two tests of validity
+                reco_list = []
+                #compare the values of frequencies of each letter in the word and its corresponding value in hand dictionary, 
+                for q in word_letters_frequencies:
+                    # if any letter in the word not present in hand or the letter isn't vowel replacing the asterisk , then return False
+                    if (word_letters_frequencies[q] <= hand.get(q,0)) or possible_words_list[i].index(q) == asterisk_index:
+                        #continue to test for the next letter if the current letter test evaluates to true
+                        reco_list.append("True")
+                    else:
+                        reco_list.append("False")
+                # if the possible word passes the two tests of validity, return true and end the function,
+                # if the word isn't valid, test the next possible word
+                if not("False" in reco_list):
+                    return True
+    #return false in two cases: 
+    #case one: the word doesn't contain asterisk and in the same time not in word list
+    #case two: all possible words aren't valid
+    return False
 
 #
 # Problem #5: Playing a hand
