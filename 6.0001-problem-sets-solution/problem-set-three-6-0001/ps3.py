@@ -398,7 +398,32 @@ def substitute_hand(hand, letter):
     returns: dictionary (string -> int)
     """
     
-    pass  # TO DO... Remove this line when you implement this function
+    # copy the original hand to mutate the copy and not affecting the original hand
+    copy_hand = copy.deepcopy(hand)
+    #store new letter
+    new_letter = ''
+    #ask the user which letter wanted to be replaced
+    user_input = letter
+    #test whether the letter is in the hand or  not
+    if copy_hand.get(user_input, 0) != 0:
+    #if in hand, replaced it
+        #randomly choose letter from VOWELS or CONSONANTS
+        new_letter = random.choice(VOWELS + CONSONANTS)
+        #the randomly choosed letter should Not be presnent in the hand already
+        while copy_hand.get(new_letter, 0) != 0:
+            new_letter = random.choice(VOWELS + CONSONANTS)
+        #substitute all letters in the hand with the new letter
+        #get the value of the user_input
+        user_input_value = copy_hand[user_input]
+        #add the new chosen letter to the current hand 
+        copy_hand[new_letter] = user_input_value
+         #delete the user_input from the current hand
+        del copy_hand[user_input]
+        #return the new hand with the replaced letter/s
+        return copy_hand
+    #otherwise return the same hand
+    else:
+        return hand
        
     
 def play_game(word_list):
