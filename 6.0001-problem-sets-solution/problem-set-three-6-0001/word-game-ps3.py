@@ -246,20 +246,17 @@ def is_valid_word(word, hand, word_list):
             if possible_words_list[i] in word_list:
                 #make dictionary contains letters of the word as keys and their number as key value
                 word_letters_frequencies = get_frequency_dict(possible_words_list[i])
-                #record the boolean results of testing whether all letters of the word are in the hand dictionary or not
-                # to end the function once the word passes the two tests of validity
-                reco_list = []
-                #compare the values of frequencies of each letter in the word and its corresponding value in hand dictionary, 
-                for q in word_letters_frequencies:
-                    # if any letter in the word not present in hand or the letter isn't vowel replacing the asterisk , then return False
-                    if (word_letters_frequencies[q] <= hand.get(q,0)) or possible_words_list[i].index(q) == asterisk_index:
-                        #continue to test for the next letter if the current letter test evaluates to true
-                        reco_list.append("True")
+		#assume all letters in the word is true, 
+                #and if any chachter of the word is not in hand, change this var to false
+                #and, if inHand remains true after checking all chachters of the word
+                #this means it's a valid word, and return the function with True value
+                inHand = True
+                for c in word_letters_frequencies:
+                    if (word_letters_frequencies[c] <= hand.get(c,0)) or possible_words_list[i].index(c) == asterisk_index:
+                        pass
                     else:
-                        reco_list.append("False")
-                # if the possible word passes the two tests of validity, return true and end the function,
-                # if the word isn't valid, test the next possible word
-                if not("False" in reco_list):
+                        inHand = False
+                if inHand:
                     return True
     #return false in two cases: 
     #case one: the word doesn't contain asterisk and in the same time not in word list
