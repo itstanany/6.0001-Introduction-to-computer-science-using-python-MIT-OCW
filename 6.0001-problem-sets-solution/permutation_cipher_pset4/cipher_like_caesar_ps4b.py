@@ -109,6 +109,17 @@ class Message(object):
         # function to construct the shift and add it to the dictionary
         #it's refractor of the below commmented code
         def add_shifted_to_dict(case_lett, shift):
+            '''
+            this function shifts down the charchters of the English alphabet by the value of input shift
+            It builds the dictionary of shifted words, it takes set of alphbet
+            and value of shifting of charchters
+            keys of dictionary are English alphabet, both lower case and upper case
+            values of the dictionary are the shifted down chacchters.
+            
+            ---------------
+            case_lett: string, set of english alphabet either lower or upper case
+            shift: int, value used to shift doen charchters
+            '''
             for l in case_lett:
                 shifted_index = case_lett.index(l) + shift
                 if (shifted_index) > 25:
