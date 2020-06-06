@@ -110,18 +110,18 @@ class Message(object):
         shifted_dict = {}
         #make the shift in the domain 0-25
         shift = shift%25
-        #loop through every lower case and map it to its shift
-        for l in low_lett:
-            shifted_index = low_lett.index(l) + shift
-            if (shifted_index) > 25:
-                shifted_index = (shift-1) - (25- low_lett.index(l))
-            shifted_dict[l] = low_lett[shifted_index]
-        #loop through every lower case and map it to its shift
-        for l in upp_lett:
-            shifted_index = upp_lett.index(l) + shift
-            if (shifted_index) > 25:
-                shifted_index = (shift-1) - (25- upp_lett.index(l))
-            shifted_dict[l] = upp_lett[shifted_index]
+        # function to construct the shift and add it to the dictionary
+        #it's refractor of the below commmented code
+        def add_shifted_to_dict(case_lett, shift):
+            for l in case_lett:
+                shifted_index = case_lett.index(l) + shift
+                if (shifted_index) > 25:
+                    shifted_index = (shift-1) - (25- case_lett.index(l))
+                shifted_dict[l] = case_lett[shifted_index]
+        #shift lower case letters and adding them to the dictionary
+        add_shifted_to_dict(string.ascii_lowercase, shift)
+        #shift upper case letters and adding them to the dictionary
+        add_shifted_to_dict(string.ascii_uppercase, shift)
         return shifted_dict
 
     def apply_shift(self, shift):
