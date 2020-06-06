@@ -102,7 +102,27 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        #string of all lower case letters
+        low_lett = 'abcdefghijklmnopqrstuvwxyz'
+        #string of all upper case letters
+        upp_lett = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        #initialize an empty dictionary to hold the shift
+        shifted_dict = {}
+        #make the shift in the domain 0-25
+        shift = shift%25
+        #loop through every lower case and map it to its shift
+        for l in low_lett:
+            shifted_index = low_lett.index(l) + shift
+            if (shifted_index) > 25:
+                shifted_index = (shift-1) - (25- low_lett.index(l))
+            shifted_dict[l] = low_lett[shifted_index]
+        #loop through every lower case and map it to its shift
+        for l in upp_lett:
+            shifted_index = upp_lett.index(l) + shift
+            if (shifted_index) > 25:
+                shifted_index = (shift-1) - (25- upp_lett.index(l))
+            shifted_dict[l] = upp_lett[shifted_index]
+        return shifted_dict
 
     def apply_shift(self, shift):
         '''
