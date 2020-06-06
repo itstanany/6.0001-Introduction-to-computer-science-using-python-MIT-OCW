@@ -102,10 +102,6 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        #string of all lower case letters
-        low_lett = 'abcdefghijklmnopqrstuvwxyz'
-        #string of all upper case letters
-        upp_lett = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         #initialize an empty dictionary to hold the shift
         shifted_dict = {}
         #make the shift in the domain 0-25
