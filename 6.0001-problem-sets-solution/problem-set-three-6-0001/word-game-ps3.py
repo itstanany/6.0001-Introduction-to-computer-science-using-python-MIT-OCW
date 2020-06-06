@@ -247,7 +247,7 @@ def is_valid_word(word, hand, word_list):
                 #make dictionary contains letters of the word as keys and their number as key value
                 word_letters_frequencies = get_frequency_dict(possible_words_list[i])
 		#assume all letters in the word is true, 
-                #and if any chachter of the word is not in hand, change this var to false
+                #and if any chachter of the word is not in hand, change this var to false and stop checking further charchters
                 #and, if inHand remains true after checking all chachters of the word
                 #this means it's a valid word, and return the function with True value
                 inHand = True
@@ -256,6 +256,7 @@ def is_valid_word(word, hand, word_list):
                         pass
                     else:
                         inHand = False
+			break
                 if inHand:
                     return True
     #return false in two cases: 
