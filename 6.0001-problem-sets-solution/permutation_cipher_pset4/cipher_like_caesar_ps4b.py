@@ -86,7 +86,7 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.valid_words[:]
 
     def build_shift_dict(self, shift):
         '''
