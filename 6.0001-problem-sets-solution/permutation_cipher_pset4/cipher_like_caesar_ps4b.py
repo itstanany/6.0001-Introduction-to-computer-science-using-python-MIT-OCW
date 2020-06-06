@@ -267,19 +267,23 @@ class CiphertextMessage(Message):
 
 if __name__ == '__main__':
 
-#    #Example test case (PlaintextMessage)
-#    plaintext = PlaintextMessage('hello', 2)
-#    print('Expected Output: jgnnq')
-#    print('Actual Output:', plaintext.get_message_text_encrypted())
-#
-#    #Example test case (CiphertextMessage)
-#    ciphertext = CiphertextMessage('jgnnq')
-#    print('Expected Output:', (24, 'hello'))
-#    print('Actual Output:', ciphertext.decrypt_message())
+    #Example test case (PlaintextMessage)
+    plaintext = PlaintextMessage('hello', 2)
+    print('Expected Output: jgnnq')
+    print('Actual Output:', plaintext.get_message_text_encrypted())
 
-    #TODO: WRITE YOUR TEST CASES HERE
+    #Example test case (CiphertextMessage)
+    ciphertext = CiphertextMessage('jgnnq')
+    print('Expected Output:', (24, 'hello'))
+    print('Actual Output:', ciphertext.decrypt_message())
 
-    #TODO: best shift value and unencrypted story 
     
-    pass #delete this line and replace with your code here
+    #TODO: best shift value and unencrypted story 
+    ciphertext = get_story_string()
+    story = CiphertextMessage(ciphertext)
+    elem_of_uncrypted_story = story.decrypt_message()
+    uncry_story = elem_of_uncrypted_story[1]
+    best_shift = elem_of_uncrypted_story[0]
+    print("Actual Plaintext Story is \n", uncry_story)
+    print("Best Shift is:", best_shift)
 
