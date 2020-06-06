@@ -146,7 +146,14 @@ class SubMessage(object):
         on the dictionary
         '''
         
-        pass #delete this line and replace with your code here
+        #string variable to hold building the encrypted msg incremently
+        encrypted_msg = ""
+        #loop through the message text and apply transpose
+        for c in self.message_text:
+            #add the transpose letter, other wise, leave it as it is.
+            encrypted_msg = encrypted_msg + transpose_dict.get(c,c)
+        #Returns: an encrypted version of the message text
+        return encrypted_msg
         
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
