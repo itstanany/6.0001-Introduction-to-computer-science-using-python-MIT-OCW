@@ -231,7 +231,39 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        #var for num of encrypted message words
+        num_words = len(self.message_text.split())
+        #initialize variable for holding max num of valid words
+        max_val_words = 0
+        #str var to keep the decrypted text of max valid words
+        max_decrypted_text = ""
+        #int var to hold shift of max valid words
+        max_shift = 0
+        #decrypt for every possible shift "s"
+        for s in range(1,27):
+            #track the current number of valid words
+            current_num_val_words = 0
+            #store the current shift
+            current_shift = s
+            #decrypt the message
+            decrypted_msg = self.apply_shift(26-s)
+            #split decrypted message in a list
+            #test for validity
+            for w in (decrypted_msg.split()):
+                if is_word(self.valid_words, w):  
+                #for each valid word, increment the current number of valid words by 1
+                    current_num_val_words += 1
+            #if the current number of valid words is equal to text words, return the function
+            if current_num_val_words == num_words:
+                return (current_shift, decrypted_msg)
+            #if current number of valid words is bigger than max valid words, update max valid words, and decryted message of maximum words, and value of shift for this max valid words
+            #otherwise, ignore this decryption and keep the last max decryption
+            if current_num_val_words > max_val_words:
+                max_val_words = current_num_val_words
+                max_decrypted_text = decrypted_msg
+                max_shift = current_shift
+        #return tuple of text and key
+        return (max_shift, max_decrypted_text)
 
 if __name__ == '__main__':
 
