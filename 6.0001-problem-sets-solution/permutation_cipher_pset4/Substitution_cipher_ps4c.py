@@ -182,11 +182,41 @@ class EncryptedSubMessage(SubMessage):
         multiple permutations that yield the maximum number of words, return any
         one of them.
 
-        Returns: the best decrypted message    
+        Returns: (best_perm, max_decryp_msg)  => tuple
+        best_perm: the permutation that make the maximum number of valid words
+        max_decryp_msg: the best decrypted message that is of maximum valid words
         
         Hint: use your function from Part 4A
         '''
-        pass #delete this line and replace with your code here
+        perms = get_permutations("aeiou")
+        best_perm = ""
+        max_decryp_msg = ""
+        max_num_val_words = 0
+        length_encrypt_msg = len(self.message_text)
+        #loop for every possible permutation
+        for perm in perms:
+            #create var to hold current permutation
+            curr_perm = perm
+            #create var to hold the sum of valid words
+            curr_num_val_words = 0
+            #build a dictionary for this permutations
+            current_transpose_dict = self.build_transpose_dict(perm)
+            #apply the encryption on the text
+            curr_decryp_msg = self.apply_transpose(current_transpose_dict)
+            #test for validity of words
+            for w in (curr_decryp_msg.split()):
+                if is_word(self.valid_words, w):
+                    curr_num_val_words += 1
+            #if equal to num of encrypted, return  the current encryption
+            if curr_num_val_words == length_encrypt_msg:
+                return (curr_perm, curr_decryp_msg)
+            #if bigger than current max, update the curent max and decrypted msg
+            if curr_num_val_words > max_num_val_words:
+                best_perm = curr_perm
+                max_decryp_msg = curr_decryp_msg
+                max_num_val_words = curr_num_val_words
+                
+        return (best_perm, max_decryp_msg)
     
 
 if __name__ == '__main__':
