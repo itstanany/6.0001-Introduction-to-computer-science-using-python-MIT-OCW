@@ -44,15 +44,16 @@ def get_permutations(sequence):
     return result
 
 if __name__ == '__main__':
-#    #EXAMPLE
-#    example_input = 'abc'
-#    print('Input:', example_input)
-#    print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
-#    print('Actual Output:', get_permutations(example_input))
+    print("UNIT TESTING")
+    #EXAMPLE
+    example_input = 'abc'
+    print('Input:', example_input)
+    print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
+    print('Actual Output:', get_permutations(example_input))
     
-#    # Put three example test cases here (for your sanity, limit your inputs
-#    to be three characters or fewer as you will have n! permutations for a 
-#    sequence of length n)
-
-    pass #delete this line and replace with your code here
-
+    #example 2
+    print("----------------------------------------------------------------------------------")
+    input2 = "aLi"
+    print("Input 2 is:", input2)
+    print("expected output2 is: ['aLi', 'aiL', Lai', 'Lia', 'iaL', iLa']")
+    print("Actual output2 is:", get_permutations(input2))
