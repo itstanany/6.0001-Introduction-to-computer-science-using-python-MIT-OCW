@@ -109,7 +109,34 @@ class SubMessage(object):
                  another letter (string). 
         '''
         
-        pass #delete this line and replace with your code here
+        perm_vow_low = vowels_permutation.lower()
+        perm_vow_upp = vowels_permutation.upper()
+        #initialize empty transpose dictionay
+        transpose_dict = {}
+        #function to map all letter to thesleves except vowels to permutation
+        
+        def add_trans_dict(lett, vowels, perm):
+            '''
+            #lett => all letter, either low or upp
+            #vowels, either upp or low
+            #perm of vowl, must be the same case type as vowels
+            '''
+            #loop through each letter in lett:
+            for c in lett:
+                #test for being vowels, if so
+                if c in vowels:
+                    #make the current letter as key and value is the shuffled charchter
+                    transpose_dict[c] = perm[vowels.index(c)]
+                else:
+                    #otherise, both the key and value are the same
+                    transpose_dict[c] = c
+        #adding lowert letter to the dictionary
+        add_trans_dict(string.ascii_lowercase, VOWELS_LOWER, perm_vow_low)
+        #adding upper letter to the dictionary
+        add_trans_dict(string.ascii_uppercase, VOWELS_UPPER, perm_vow_upp)
+        #returning copy of dictionary to avoid modifying the original one
+        return transpose_dict.copy()
+
     
     def apply_transpose(self, transpose_dict):
         '''
