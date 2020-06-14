@@ -7,7 +7,7 @@ The book accompanies the course is titled 'John V. Guttag - Introduction to Comp
 
 
 Folders:
-6.0001-problem-sets-solution:  contains code of progeamming assignments whic are:
+6.0001-problem-sets-solution:  contains code of progeamming assignments whic are: \n
     Problem set one: House Hunting
     problem set two: Hangman Game
     problem set three: Word Game
